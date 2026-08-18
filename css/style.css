@@ -367,6 +367,23 @@ body {
   fill: none;
 }
 
+/* premium status */
+.premium-status {
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(0, 230, 118, 0.08);
+  border: 1px solid rgba(0, 230, 118, 0.2);
+}
+.premium-status .status-label {
+  font-weight: 600;
+  color: #00e676;
+}
+.premium-status .status-detail {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
 /* responsive */
 @media (max-width: 600px) {
   .glass-card { padding: 20px 16px; }
