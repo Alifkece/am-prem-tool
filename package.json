@@ -1,7 +1,7 @@
 {
   "name": "alight-motion-premium-tool",
   "version": "1.0.0",
-  "description": "Alight Motion Premium Tool - Request and verify access using magic links",
+  "description": "Alight Motion Premium Tool - Generate premium via AlightPro API",
   "main": "index.html",
   "scripts": {
     "start": "vercel dev"
@@ -10,11 +10,15 @@
     "alight-motion",
     "premium",
     "vercel",
-    "serverless"
+    "serverless",
+    "alightpro"
   ],
   "author": "Aliftzycrt",
   "license": "MIT",
   "engines": {
     "node": ">=18.x"
+  },
+  "dependencies": {
+    "crypto": "^1.0.1"
   }
 }
