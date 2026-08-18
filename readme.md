@@ -1,14 +1,15 @@
 # ALIGHT MOTION PREMIUM TOOL
 
-A modern web application for requesting and verifying Alight Motion premium access using magic links.
+A modern web application for generating Alight Motion Premium using AlightPro API.
 
 ## Features
 
-- Request access via email
-- Verify access using magic links
+- Request magic link via email
+- Verify and activate premium
 - Modern glassmorphism UI
 - Responsive mobile-first design
-- Secure backend API integration
+- Secure backend with AlightPro API integration
+- POW (Proof of Work) protection bypass
 
 ## Deployment to Vercel
 
@@ -33,9 +34,8 @@ Add the following environment variables in your Vercel project settings:
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `UPSTREAM_SEND_URL` | The API endpoint for sending magic links | `https://znn-alightmotion.vercel.app/api/send` |
-| `UPSTREAM_VERIFY_URL` | The API endpoint for verifying magic links | `https://znn-alightmotion.vercel.app/api/verify` |
-| `UPSTREAM_API_KEY` | (Optional) API key for authentication | - |
+| `ALIGHTPRO_BASE_URL` | Base URL of AlightPro API | `https://www.alightpro.my.id` |
+| `ALIGHTPRO_SECRET` | Secret key for human proof | `amprem-human-v3-secret-2026` |
 
 These variables are used securely on the server-side only. Never expose them in the frontend.
 
