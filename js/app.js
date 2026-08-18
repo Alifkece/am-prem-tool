@@ -11,6 +11,8 @@
   const verifyBtn = document.getElementById('verifyBtn');
   const requestStatus = document.getElementById('requestStatus');
   const verifyStatus = document.getElementById('verifyStatus');
+  const statusCard = document.getElementById('statusCard');
+  const statusContent = document.getElementById('statusContent');
 
   // helpers
   function setLoading(btn, loading) {
@@ -47,6 +49,27 @@
   function clearStatus(container) {
     container.className = 'status-card';
     container.innerHTML = '';
+  }
+
+  function showPremiumStatus(data) {
+    statusCard.style.display = 'block';
+    const status = data.accountLinkStatus ? 'Active' : 'Pending';
+    const expiry = data.expiryTimeMillis ? new Date(data.expiryTimeMillis).toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }) : 'Not set';
+    
+    statusContent.innerHTML = `
+      <div class="premium-status">
+        <div class="status-label">Premium Status: ${status}</div>
+        <div class="status-detail">Email: ${data.email || 'N/A'}</div>
+        <div class="status-detail">Expiry: ${expiry}</div>
+        <div class="status-detail">Auto Renew: ${data.autoRenewing ? 'Yes' : 'No'}</div>
+        <div class="status-detail" style="margin-top:8px;color:#00e676;">${data.message || 'Premium activated successfully!'}</div>
+      </div>
+    `;
+    statusCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   // ----- REQUEST (send) -----
@@ -101,7 +124,20 @@
       });
       const data = await resp.json();
       if (!resp.ok) throw new Error(data.message || 'Verification failed');
+      
       showStatus(verifyStatus, 'success', 'Verification Successful', data.message || 'Access granted.', email);
+      
+      // Show premium status
+      if (data.data) {
+        showPremiumStatus({
+          email: email,
+          accountLinkStatus: data.accountLinkStatus,
+          expiryTimeMillis: data.expiryTimeMillis,
+          autoRenewing: data.autoRenewing,
+          message: data.message
+        });
+      }
+      
       linkVerify.value = '';
       emailVerify.value = '';
     } catch (err) {
